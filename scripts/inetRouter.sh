@@ -4,11 +4,19 @@
 mkdir -p ~root/.ssh
 cp ~vagrant/.ssh/auth* ~root/.ssh
 
+# Перезапускаем сеть
+service network restart
+
 # Включаем прохождение пакетов между сетевыми интерфейсами
-sysctl net.ipv4.conf.all.forwarding=1
+sed -i 's/net.ipv4.ip_forward = 0/net.ipv4.ip_forward = 1/' /etc/sysctl.conf
+
+# Перезапускаем сеть
+service network restart
 
 # Добавим правило iptables
 iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+service iptables save
 
-# Добавим маршрут для подсетей central, office1, office2
-ip route add 192.168.0.0/22 dev eth1 via 192.168.255.2
+# Усановим пакеты
+# yum install -y epel-release
+yum install -y vim mc
