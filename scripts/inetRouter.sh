@@ -16,3 +16,5 @@ service iptables save
 
 # Перезапускаем сеть
 service network restart
+
+# ip route add 192.168.0.0/22 via 192.168.255.2 dev eth1

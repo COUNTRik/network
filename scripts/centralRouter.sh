@@ -4,6 +4,9 @@
 mkdir -p ~root/.ssh
 cp ~vagrant/.ssh/auth* ~root/.ssh
 
+# Установим пакеты
+yum install -y mc vim mtr
+
 # Включаем прохождение пакетов между сетевыми интерфейсами
 echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 
@@ -16,3 +19,6 @@ yum install -y mc vim
 
 # Перезапускаем сервис сети
 reboot
+
+# ip route add 192.168.1.0/24 via 192.168.3.3 dev eth2
+# ip route add 192.168.2.0/24 via 192.168.3.2 dev eth2
