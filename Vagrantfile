@@ -17,7 +17,7 @@ MACHINES = {
       :box_name => "centos/7",
       :net => [
                  {ip: '192.168.255.2', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
-                 {ip: '192.168.252.1', adapter: 3, netmask: "255.255.255.252", virtualbox__intnet: "local-net"},
+                 {ip: '192.168.3.1', adapter: 3, netmask: "255.255.255.248", virtualbox__intnet: "local-net"},
                  {ip: '192.168.0.1', adapter: 4, netmask: "255.255.255.128", virtualbox__intnet: "dir-net"},
                  {ip: '192.168.0.129', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "hw-net"},
                  {ip: '192.168.0.193', adapter: 6, netmask: "255.255.255.192", virtualbox__intnet: "wifi-net"},
@@ -27,18 +27,18 @@ MACHINES = {
 :office1Router => {
       :box_name => "centos/7",
       :net => [
-                 {ip: '192.168.252.2', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "local-net"},
+                 {ip: '192.168.3.2', adapter: 2, netmask: "255.255.255.248", virtualbox__intnet: "local-net"},
                  {ip: '192.168.2.1', adapter: 3, netmask: "255.255.255.192", virtualbox__intnet: "dev-net"},
                  {ip: '192.168.2.65', adapter: 4, netmask: "255.255.255.192", virtualbox__intnet: "test-net"},
                  {ip: '192.168.2.129', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "mgs-net"},
-                 {ip: '192.168.2.192', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "hw-net"},
+                 {ip: '192.168.2.192', adapter: 6, netmask: "255.255.255.192", virtualbox__intnet: "hw-net"},
               ]
 },
 
 :office2Router => {
       :box_name => "centos/7",
       :net => [
-                 {ip: '192.168.252.3', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "local-net"},
+                 {ip: '192.168.3.3', adapter: 2, netmask: "255.255.255.248", virtualbox__intnet: "local-net"},
                  {ip: '192.168.1.1', adapter: 3, netmask: "255.255.255.128", virtualbox__intnet: "dev-net"},
                  {ip: '192.168.1.129', adapter: 4, netmask: "255.255.255.192", virtualbox__intnet: "test-net"},
                  {ip: '192.168.1.193', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "hw-net"},

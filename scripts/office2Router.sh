@@ -11,4 +11,4 @@ echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
 
 # Перезапускаем сервис сети
-systemctl restart network
+reboot
