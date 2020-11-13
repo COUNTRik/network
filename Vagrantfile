@@ -85,29 +85,34 @@ Vagrant.configure("2") do |config|
           box.vm.network "public_network", boxconfig[:public]
         end
         
-        case boxname.to_s
-        when "inetRouter"
-          box.vm.provision "shell", path: "scripts/inetRouter.sh"
-          
-        when "centralRouter"
-          box.vm.provision "shell", path: "scripts/centralRouter.sh"
-          
-        when "office1Router"
-          box.vm.provision "shell", path: "scripts/office1Router.sh"
-        
-        when "office2Router"
-          box.vm.provision "shell", path: "scripts/office2Router.sh"
-
-        when "centralServer"
-          box.vm.provision "shell", path: "scripts/centralServer.sh"
-
-        when "office1Server"
-          box.vm.provision "shell", path: "scripts/office1Server.sh"
-
-        when "office2Server"
-          box.vm.provision "shell", path: "scripts/office2Server.sh"
-
+        box.vm.provision "ansible" do |ansible|
+          ansible.verbose = "v"
+          ansible.playbook = "playbook.yml"
         end
+        
+        # case boxname.to_s
+        # when "inetRouter"
+        #   box.vm.provision "shell", path: "scripts/inetRouter.sh"
+          
+        # when "centralRouter"
+        #   box.vm.provision "shell", path: "scripts/centralRouter.sh"
+          
+        # when "office1Router"
+        #   box.vm.provision "shell", path: "scripts/office1Router.sh"
+        
+        # when "office2Router"
+        #   box.vm.provision "shell", path: "scripts/office2Router.sh"
+
+        # when "centralServer"
+        #   box.vm.provision "shell", path: "scripts/centralServer.sh"
+
+        # when "office1Server"
+        #   box.vm.provision "shell", path: "scripts/office1Server.sh"
+
+        # when "office2Server"
+        #   box.vm.provision "shell", path: "scripts/office2Server.sh"
+
+        # end
 
       end
 

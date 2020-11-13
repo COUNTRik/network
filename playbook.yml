@@ -1,0 +1,20 @@
+---
+- name: Install package
+  hosts: all
+  become: true
+  
+  tasks:    
+    - name: Install user package
+      yum:
+        name:
+          - mtr
+        state: latest
+      notify: restrat network
+      tags:
+        - package
+
+  handlers:
+    - name: restrat network
+      systemd:
+        name: network
+        state: restarted

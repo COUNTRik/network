@@ -1,15 +1,5 @@
-# #!/bin/bash
+#!/usr/bin/env bash
 
-# Авторизуемся для получения root прав
-mkdir -p ~root/.ssh
-cp ~vagrant/.ssh/auth* ~root/.ssh
-
-# Установим пакеты
-yum install -y mc vim mtr
-
-# Удаляем маршрут по умолчанию от вагранта и устанавливаем нужный нам маршрут
-echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0
-echo "GATEWAY=192.168.0.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
-
-# Перезапускаем сервис сети
-reboot
+# Удаляем маргрут по умолчанию и ставим нужные нам маршруты
+ip route del default via 10.0.2.2 dev eth0
+ip route add default via 192.168.0.1 dev eth1
