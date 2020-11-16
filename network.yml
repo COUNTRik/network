@@ -1,6 +1,8 @@
 ---
 - name: Restart network
-  hosts: all
+  hosts:
+    - local
+    - servers
   become: true
 
   tasks:
@@ -9,65 +11,82 @@
         name: network
         state: restarted
 
-- name: inetRouter
-  hosts: inetRouter
+
+- name: Route inetRouter
+  hosts: inet
   become: true
 
   tasks:
     - name: inetRouter script
-      command: /vagrant/scripts/inetRouter.sh
-
+      shell: ip route add 192.168.0.0/22 via 192.168.255.2 dev eth1
       
-- name: centralRouter
+
+- name: Route centralRouter
   hosts: centralRouter
   become: true
 
   tasks:
-    - name: centralRouter script
-      command: /vagrant/scripts/centralRouter.sh
+    - name: del default route
+      shell: ip route del default via 10.0.2.2 dev eth0
+    - name: add default route
+      shell: ip route add default via 192.168.255.1 dev eth1
+    - name: add office2 route
+      shell: ip route add 192.168.1.0/24 via 192.168.3.3 dev eth2
+    - name: add office1 route
+      shell: ip route add 192.168.2.0/24 via 192.168.3.2 dev eth2
 
 
-- name: office1Router
+- name: Route office1Router
   hosts: office1Router
   become: true
 
   tasks:
-    - name: office1Router script
-      command: /vagrant/scripts/office1Router.sh
+    - name: del default route
+      shell: ip route del default via 10.0.2.2 dev eth0
+    - name: add default route
+      shell: ip route add default via 192.168.3.1 dev eth1
+      
 
-
-- name: office2Router
+- name: Route office2Router
   hosts: office2Router
   become: true
 
   tasks:
-    - name: office2Router script
-      command: /vagrant/scripts/office2Router.sh
+    - name: del default route
+      shell: ip route del default via 10.0.2.2 dev eth0
+    - name: add default route
+      shell: ip route add default via 192.168.3.1 dev eth1
 
 
-- name: centralServer
+- name: Route centralServer
   hosts: centralServer
   become: true
 
   tasks:
-    - name: centralServer script
-      command: /vagrant/scripts/centralServer.sh
+    - name: del default route
+      shell: ip route del default via 10.0.2.2 dev eth0
+    - name: add default route
+      shell: ip route add default via 192.168.0.1 dev eth1  
 
 
-- name: office1Server
+- name: Route office1Server
   hosts: office1Server
   become: true
 
   tasks:
-    - name: office1Server script
-      command: /vagrant/scripts/office1Server.sh
+    - name: del default route
+      shell: ip route del default via 10.0.2.2 dev eth0
+    - name: add default route
+      shell: ip route add default via 192.168.2.1 dev eth1
 
 
-- name: office2Server
+- name: Route office2Server
   hosts: office2Server
   become: true
 
   tasks:
-    - name: office2Server script
-      command: /vagrant/scripts/office2Server.sh
+    - name: del default route
+      shell: ip route del default via 10.0.2.2 dev eth0
+    - name: add default route
+      shell: ip route add default via 192.168.1.1 dev eth1
       

@@ -85,14 +85,14 @@ Vagrant.configure("2") do |config|
           box.vm.network "public_network", boxconfig[:public]
         end
         
-        box.vm.provision "ansible" do |ansible|
-          ansible.verbose = "v"
-          ansible.playbook = "playbook.yml"
-        end
+        # box.vm.provision "ansible" do |ansible|
+        #   ansible.verbose = "v"
+        #   ansible.playbook = "playbook.yml"
+        # end
         
-        # case boxname.to_s
-        # when "inetRouter"
-        #   box.vm.provision "shell", path: "scripts/inetRouter.sh"
+        case boxname.to_s
+        when "inetRouter"
+          box.vm.provision "shell", path: "scripts/inetRouter.sh"
           
         # when "centralRouter"
         #   box.vm.provision "shell", path: "scripts/centralRouter.sh"
@@ -112,7 +112,7 @@ Vagrant.configure("2") do |config|
         # when "office2Server"
         #   box.vm.provision "shell", path: "scripts/office2Server.sh"
 
-        # end
+        end
 
       end
 
